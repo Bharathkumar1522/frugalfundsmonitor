@@ -1,0 +1,71 @@
+<%-include("partials/header.ejs")%> 
+<%-include("partials/navbar.ejs")%> 
+    
+  
+    <h1 class = "hello-user">Transaction History</h1>
+    <hr class = "divider">
+    <div class = "row"> 
+      <div class = "col-12 " id = "current-month-transactions">
+        <h1 class = "transaction-font">Current Month Transactions</h1> 
+        <div class=" col-12 p-2 px-3 p-md-2">
+          <div class="transaction-card d-flex flex-row">
+            <div class = "income-icon"><i class="fa-solid fa-arrow-trend-up fa-lg "></i></div>
+            <div>
+              <h1 class = "transaction-card-heading">Salary</h1>
+              <h1 class = "transaction-card-category my-auto">Income</h1> 
+            </div>
+            <div class = "ml-auto my-auto">
+              <h1 class = "transaction-card-heading">+37,000</h1>
+              <h1 class = "transaction-card-category my-auto">2/10/2024</h1>
+            </div>
+          </div>
+        </div>
+        <div class=" col-12 p-2 px-3 p-md-2">
+          <div class="transaction-card d-flex flex-row">
+            <div class = "expense-icon "><i class="fa-solid fa-arrow-trend-down fa-lg "></i></div>
+            <div>
+              <h1 class = "transaction-card-heading">Groceries</h1>
+              <h1 class = "transaction-card-category my-auto">Shopping</h1> 
+            </div>
+            <div class = "ml-auto my-auto">
+              <h1 class = "transaction-card-heading">-12,000</h1>
+              <h1 class = "transaction-card-category my-auto">12/10/2024</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class = "col-12" id = "previous-transactions">
+          <h1 class = "transaction-font">Previous Transaction</h1>
+          <div class=" col-12 p-2 px-3 p-md-2">
+            <div class="transaction-card d-flex flex-row">
+              <div class = "income-icon"><i class="fa-solid fa-arrow-trend-up fa-lg "></i></div>
+              <div>
+                <h1 class = "transaction-card-heading">Salary</h1>
+                <h1 class = "transaction-card-category my-auto">Income</h1> 
+              </div>
+              <div class = "ml-auto my-auto">
+                <h1 class = "transaction-card-heading">+37,000</h1>
+                <h1 class = "transaction-card-category my-auto">2/10/2024</h1>
+              </div>
+            </div>
+          </div>
+          <div class=" col-12 p-2 px-3 p-md-2">
+            <div class="transaction-card d-flex flex-row">
+              <div class = "expense-icon "><i class="fa-solid fa-arrow-trend-down fa-lg "></i></div>
+              <div>
+                <h1 class = "transaction-card-heading">Groceries</h1>
+                <h1 class = "transaction-card-category my-auto">Shopping</h1> 
+              </div>
+              <div class = "ml-auto my-auto">
+                <h1 class = "transaction-card-heading">-12,000</h1>
+                <h1 class = "transaction-card-category my-auto">12/10/2024</h1>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>  
+  
+
+  
+ 
+<%-include("partials/footer.ejs")%> 

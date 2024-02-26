@@ -1,0 +1,40 @@
+<%-include("partials/header.ejs")%> 
+<div class = "d-flex flex-row justify-content-center pt-5">
+    <div class="container-login-page ">
+        <div class="heading-login-page">Sign up</div>
+        <form class="form-login-page" action="">
+            <input
+            placeholder="Enter your name"
+            id="name"
+            name="name"
+            type="text"
+            class="input"
+            required=""
+          />
+          <input
+            placeholder="Enter Username"
+            id="username"
+            name="username"
+            type="text"
+            class="input"
+            required=""
+          />
+          <input
+            placeholder="Create Password"
+            id="password"
+            name="password"
+            type="password"
+            class="input "
+            required=""
+          />
+          <a  class="login-button " href="/home"> Sign up</a>
+        </form>
+
+        <div class="bottom-text">
+          <p>Already have an account? </p>
+          <a href="/">Login</a>
+        </div>
+      </div>
+</div>
+
+<%-include("partials/footer.ejs")%> 

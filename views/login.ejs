@@ -1,0 +1,31 @@
+<%-include("partials/header.ejs")%> 
+<div class = "d-flex flex-row justify-content-center pt-5">
+    <div class="container-login-page ">
+        <div class="heading-login-page">Login</div>
+        <form class="form-login-page" action="">
+          <input
+            placeholder="Username"
+            id="username"
+            name="username"
+            class="input"
+            required=""
+          />
+          <input
+            placeholder="Password"
+            id="password"
+            name="password"
+            type="password"
+            class="input mt-4"
+            required=""
+          />
+          <a  class="login-button" href="/home"> Login</a>
+        </form>
+
+        <div class="bottom-text">
+          <p>Don't have an account? </p>
+          <a href="/signup" class = "text-center">Sign Up</a>
+        </div>
+      </div>
+</div>
+
+<%-include("partials/footer.ejs")%> 
