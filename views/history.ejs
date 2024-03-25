@@ -3,65 +3,91 @@
     
   
     <h1 class = "hello-user">Transaction History</h1>
-    <hr class = "divider">
+    <hr class="divider">
     <div class = "row"> 
       <div class = "col-12 " id = "current-month-transactions">
-        <h1 class = "transaction-font">Current Month Transactions</h1> 
-        <div class=" col-12 p-2 px-3 p-md-2">
-          <div class="transaction-card d-flex flex-row">
-            <div class = "income-icon"><i class="fa-solid fa-arrow-trend-up fa-lg "></i></div>
-            <div>
-              <h1 class = "transaction-card-heading">Salary</h1>
-              <h1 class = "transaction-card-category my-auto">Income</h1> 
-            </div>
-            <div class = "ml-auto my-auto">
-              <h1 class = "transaction-card-heading">+37,000</h1>
-              <h1 class = "transaction-card-category my-auto">2/10/2024</h1>
+        <h1 class = "transaction-font pl-3">Current month</h1> 
+        <% if(locals.current_month_transactions && current_month_transactions.length != 0){ %>
+          <% current_month_transactions.forEach((transaction) => { %>
+            <% if(transaction.type === 'income'){ %>
+              <div class=" col-12 p-2 px-3 p-md-2">
+                <div class="transaction-card d-flex flex-row">
+                  <div class = "income-icon"><i class="fa-solid fa-arrow-trend-up fa-lg "></i></div>
+                  <div>
+                    <h1 class = "transaction-card-heading"><%= transaction.name %></h1>
+                    <h1 class = "transaction-card-category "><%= transaction.category %></h1> 
+                  </div>
+                  <div class = "ml-auto my-auto">
+                    <h1 class = "transaction-card-amount" style ="color:rgb(64, 198, 64)">+<%= transaction.amount %> </h1>
+                    <h1 class = "transaction-card-date "> <%= transaction.date %></h1>
+                  </div>
+                </div>
+              </div>
+            <% }else{ %>
+              <div class=" col-12 p-2 px-3 p-md-2">
+                <div class="transaction-card d-flex flex-row">
+                  <div class = "expense-icon "><i class="fa-solid fa-arrow-trend-down fa-lg "></i></div>
+                  <div>
+                    <h1 class = "transaction-card-heading"><%= transaction.name %></h1>
+                    <h1 class = "transaction-card-category"><%= transaction.category %></h1> 
+                  </div>
+                  <div class = "ml-auto my-auto">
+                    <h1 class = "transaction-card-amount" style ="color: rgb(255, 85, 114)">-<%= transaction.amount %></h1>
+                    <h1 class = "transaction-card-date "><%= transaction.date %></h1>
+                  </div>
+                </div>
+              </div>
+            <% } %>
+            <% }) %>
+        <% }else{ %>
+          <div class="col-12 p-4 px-3 p-md-2">
+            <div class="transaction-card text-center">
+              <p class="m-0">No transactions in current month.</p>
             </div>
           </div>
-        </div>
-        <div class=" col-12 p-2 px-3 p-md-2">
-          <div class="transaction-card d-flex flex-row">
-            <div class = "expense-icon "><i class="fa-solid fa-arrow-trend-down fa-lg "></i></div>
-            <div>
-              <h1 class = "transaction-card-heading">Groceries</h1>
-              <h1 class = "transaction-card-category my-auto">Shopping</h1> 
-            </div>
-            <div class = "ml-auto my-auto">
-              <h1 class = "transaction-card-heading">-12,000</h1>
-              <h1 class = "transaction-card-category my-auto">12/10/2024</h1>
-            </div>
-          </div>
-        </div>
+        <% } %>
       </div>
       <div class = "col-12" id = "previous-transactions">
-          <h1 class = "transaction-font">Previous Transaction</h1>
-          <div class=" col-12 p-2 px-3 p-md-2">
-            <div class="transaction-card d-flex flex-row">
-              <div class = "income-icon"><i class="fa-solid fa-arrow-trend-up fa-lg "></i></div>
-              <div>
-                <h1 class = "transaction-card-heading">Salary</h1>
-                <h1 class = "transaction-card-category my-auto">Income</h1> 
-              </div>
-              <div class = "ml-auto my-auto">
-                <h1 class = "transaction-card-heading">+37,000</h1>
-                <h1 class = "transaction-card-category my-auto">2/10/2024</h1>
+          <h1 class = "transaction-font pl-3">Previous transactions</h1>
+          <% if(locals.previous_transactions && previous_transactions.length != 0){ %>
+            <% previous_transactions.forEach((transaction) => { %>
+              <% if(transaction.type === 'income'){ %>
+                <div class=" col-12 p-2 px-3 p-md-2">
+                  <div class="transaction-card d-flex flex-row">
+                    <div class = "income-icon"><i class="fa-solid fa-arrow-trend-up fa-lg "></i></div>
+                    <div>
+                      <h1 class = "transaction-card-heading"><%= transaction.name %></h1>
+                      <h1 class = "transaction-card-category "><%= transaction.category %></h1> 
+                    </div>
+                    <div class = "ml-auto my-auto">
+                      <h1 class = "transaction-card-amount" style ="color:rgb(64, 198, 64)">+ <%= transaction.amount %> </h1>
+                      <h1 class = "transaction-card-date "> <%= transaction.date %></h1>
+                    </div>
+                  </div>
+                </div>
+              <% }else{ %>
+                <div class=" col-12 p-2 px-3 p-md-2">
+                  <div class="transaction-card d-flex flex-row">
+                    <div class = "expense-icon "><i class="fa-solid fa-arrow-trend-down fa-lg "></i></div>
+                    <div>
+                      <h1 class = "transaction-card-heading"><%= transaction.name %></h1>
+                      <h1 class = "transaction-card-category "><%= transaction.category %></h1> 
+                    </div>
+                    <div class = "ml-auto my-auto">
+                      <h1 class = "transaction-card-amount" style ="color: rgb(255, 85, 114)">- <%= transaction.amount %></h1>
+                      <h1 class = "transaction-card-date "><%= transaction.date %></h1>
+                    </div>
+                  </div>
+                </div>
+              <% } %>
+              <% }) %>
+          <% }else{ %>
+            <div class="col-12 p-4 px-3 p-md-2">
+              <div class="transaction-card text-center">
+                <p class="m-0">No previous transactions found.</p>
               </div>
             </div>
-          </div>
-          <div class=" col-12 p-2 px-3 p-md-2">
-            <div class="transaction-card d-flex flex-row">
-              <div class = "expense-icon "><i class="fa-solid fa-arrow-trend-down fa-lg "></i></div>
-              <div>
-                <h1 class = "transaction-card-heading">Groceries</h1>
-                <h1 class = "transaction-card-category my-auto">Shopping</h1> 
-              </div>
-              <div class = "ml-auto my-auto">
-                <h1 class = "transaction-card-heading">-12,000</h1>
-                <h1 class = "transaction-card-category my-auto">12/10/2024</h1>
-              </div>
-            </div>
-          </div>
+          <% } %>
       </div>
     </div>  
   
