@@ -6,9 +6,6 @@ toggle.addEventListener('click', () => {
   toggle_symbol.classList.toggle('fa-xmark');
 });
 
-// document.getElementById('myModal').addEventListener('shown.bs.modal', function () {
-//   document.getElementById('myInput').focus();
-// });
 
 document.addEventListener('DOMContentLoaded', function() {
   const dropdown = document.getElementById('dropdown');
@@ -22,3 +19,17 @@ document.addEventListener('DOMContentLoaded', function() {
   };
   dropdown.addEventListener('shown.bs.dropdown', toggleDropdown);
 });
+
+
+// Get the date input element
+var dateInput = document.getElementById('transaction-date-input');
+// Get the current date
+var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+var yyyy = today.getFullYear();
+var currentDate = yyyy + '-' + mm + '-' + dd;
+
+// Set the max attribute to the current date
+dateInput.setAttribute('max', currentDate);
+

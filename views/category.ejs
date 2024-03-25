@@ -4,107 +4,145 @@
 <h1 class = "hello-user">Categories and Limits</h1>
 
 <div>
-    <table class="table table-hover">
-    <thead>
+    <% if(locals.categories && categories.length != 0){ %>
+      <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Category Name</th>
+          <th scope="col">Limit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% categories.forEach((category) => { %>
       <tr>
-        <th scope="col">Category Name</th>
-        <th scope="col">Limit</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <!-- <th scope="row">1</th> -->
-        <td>Others</td>
-        <td>-</td>
-      </tr>
-      <tr>
-        <!-- <th scope="row">1</th> -->
-        <td>Shopping</td>
-        <td>-</td>
-      </tr>
-      <tr>
-        <!-- <th scope="row">1</th> -->
-        <td>Food</td>
-        <td>-</td>
-      </tr>
-      <tr>
-        <!-- <th scope="row">1</th> -->
-        <td>Transport</td>
-        <td>-</td>
-      </tr>
+        <td><%= category.name %></td>
+        <td>
+          <% if(category.limit !=  null){ %>
+            <%= category.limit %>
+          <% }else{ %>
+            -
+          <% } %>
+        </td>
+      <% }) %>
     </tbody>
   </table>
+    <% }else{ %>
+      <div class="text-center p-3">
+        <% if(locals.error){ %>
+          <%= error %>
+        <% }else{ %>
+          <p>No categories are added. Add categories to view them here.</p>
+        <% } %>
+      </div>
+    <% } %>
 </div>
 
 <div class = "buttons-position p-5"> 
-    <button type="button" class="modal-cancel-button"  data-toggle="modal" data-target="#staticBackdrop">Edit</button>
-    <button type="button" class="modal-add-category-btn ml-4" data-toggle="modal" data-target="#staticBackdrop1">Add Category</button>
+  <button type="button" class="modal-add-category-btn ml-4" data-toggle="modal" data-target="#staticBackdrop2">Add</button>
+  <button type="button" class="modal-add-category-btn"  data-toggle="modal" data-target="#staticBackdrop1">Edit</button>
+  <button type="button" class="modal-cancel-button"  data-toggle="modal" data-target="#staticBackdrop3">Delete</button>
 </div>
 
-  <!-- Modal -->
-  <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <!-- Modal 1 -->
+  <div class="modal fade" id="staticBackdrop1" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content modal-style-edit">
+        <div class="modal-header">
+          <h5 class="modal-title modal-heading-style" id="staticBackdropLabel">Edit Category</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div> 
+        <form action="/edit-category" method="PATCH">
+          <div class="modal-body">    
+              <label class = "label-head" for="">Select a Category:</label>
+              <br>
+              <select id="dropdown" class = "input-modal" name="category">
+                <% if(locals.categories){ %>
+                  <% categories.forEach((category) =>{ %>
+                    <option value = <%= category.id %> > <%= category.name%> </option>
+                  <% }) %>
+                <% }else{ %>
+                  <option value="Others">Others</option>
+                <% } %>
+              </select>
+              <br>
+              <label class = "label-head" >New category Name</label> 
+              <input type="text" name="expenditure" class="input-modal" placeholder="New category" >
+  
+              <label class = "label-head">Enter Limit</label> 
+              <input type="number" name="text" class="input-modal" placeholder="Limit amount" >
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="modal-cancel-button" data-dismiss="modal">Cancel</button>
+            <button type="submit" class="modal-add-button">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+    
+  <!-- Modal 2 -->
+  <div class="modal fade" id="staticBackdrop2" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable ">
       <div class="modal-content modal-style-edit">
         <div class="modal-header">
-          <h5 class="modal-title modal-heading-style" id="staticBackdropLabel">Add transaction</h5>
+          <h5 class="modal-title modal-heading-style" id="staticBackdropLabel">Add Category</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body">    
-           <label class = "label-head" for="">Select a Category:</label>
-           <br>
-            <select id="dropdown" class = "input-modal">
-                <option value="option1">Option 1</option>
-                <option value="option2">Option 2</option>
-                <option value="option3">Option 3</option>
-            </select>
-            <br>
-            <label class = "label-head" for="">New category Name</label> 
-           <input type="text" name="expenditure" class="input-modal" placeholder="New category" >
-
-            
-            <label class = "label-head" for="">Enter Limit</label> 
-            <input type="number" name="text" class="input-modal" placeholder="Limit amount" >
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="modal-cancel-button" data-dismiss="modal">Cancel</button>
-          <button type="button" class="modal-add-button">Save</button>
-        </div>
+        <form action="/add-category" method="POST">
+          <div class="modal-body">   
+              <label class = "label-head" for="">New category Name</label> 
+              <input type="text" name="category" class="input-modal" placeholder="New category" required="">
+  
+              <label class = "label-head" for="">Enter Limit</label> 
+              <input type="amount" name="limit" class="input-modal" placeholder="Limit amount" >
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="modal-cancel-button" data-dismiss="modal">Cancel</button>
+            <button type="submit" class="modal-add-button">Save</button>
+          </div>
+        </form>
       </div>
     </div>
-
-    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable ">
+  </div>
+  
+    
+  <!-- Modal 3 -->
+  <div class="modal fade" id="staticBackdrop3" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content modal-style-edit">
         <div class="modal-header">
-          <h5 class="modal-title modal-heading-style" id="staticBackdropLabel">Add transaction</h5>
+          <h5 class="modal-title modal-heading-style" id="staticBackdropLabel">Edit Category</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
-        </div>
-        <div class="modal-body">    
-           <label class = "label-head" for="">Select a Category:</label>
-           <br>
-            <select id="dropdown" class = "input-modal">
-                <option value="option1">Option 1</option>
-                <option value="option2">Option 2</option>
-                <option value="option3">Option 3</option>
-            </select>
-            <br>
-            <label class = "label-head" for="">New category Name</label> 
-           <input type="text" name="expenditure" class="input-modal" placeholder="New category" >
-
-            
-            <label class = "label-head" for="">Enter Limit</label> 
-            <input type="number" name="text" class="input-modal" placeholder="Limit amount" >
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="modal-cancel-button" data-dismiss="modal">Cancel</button>
-          <button type="button" class="modal-add-button">Save</button>
-        </div>
+        </div> 
+        <form action="/delete-category" method="POST">
+          <div class="modal-body">    
+              <label class = "label-head" for="">Select a Category to delete:</label>
+              <br>
+              <select id="dropdown" class = "input-modal" name="id">
+                <% if(locals.categories){ %>
+                  <% categories.forEach((category) =>{ %>
+                    <option value = <%= category.id %> > <%= category.name%> </option>
+                  <% }) %>
+                <% }else{ %>
+                  <option value="Others">Others</option>
+                <% } %>
+              </select>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="modal-cancel-button">Delete</button>
+            <button type="button" class="modal-add-button" data-dismiss="modal">Cancel</button>
+          </div>
+        </form>
       </div>
     </div>
+  </div>
 
   
   <%-include("partials/footer.ejs")%>    

@@ -1,63 +1,91 @@
 <%-include("partials/header.ejs")%> 
 <%-include("partials/navbar.ejs")%>   
-  
-    <h1 class = "hello-user">Hello User</h1>
-    <hr>
+
+    <h1 class = "hello-user">Hello 
+      <% if(locals.name_of_user &&  user_details.balance != null){ %>
+        <%= name_of_user %>
+      <% }else{ %>
+        User
+      <% } %>
+    </h1>
     <div class="row mb-4">
         <div class=" col-12 col-md-6 p-2 px-3 p-md-2">
           <div class="balance-card">
-            <p class ="card-heading-text">Income</p>
-            <h1 class = "card-amount-text">54,000</h1> 
+            <p class ="card-heading-text">Balance</p>
+            <h1 class = "card-amount-text">
+              <% if(locals.user_details){ %>
+                <%= user_details.balance %>
+              <% }else{ %>
+                0
+              <% } %>
+            </h1> 
           </div>
         </div>
         <div class=" col-12 col-md-6 p-2 px-3 p-md-2">
           <div class="income-card">
-            <p class ="card-heading-text">Balance</p>
-            <h1 class = "card-amount-text">37,000</h1> 
+            <p class ="card-heading-text">Expenses</p>
+            <h1 class = "card-amount-text">
+              <% if(locals.user_details && user_details.expense != null){ %>
+                <%= user_details.expense %>
+              <% }else{ %>
+                0
+              <% } %>
+            </h1> 
           </div>
         </div>
     </div>
 
     <h1 class = "transaction-font">Transactions</h1>
-    <hr>
-
     <div class="row">
-      <div class=" col-12 p-2 px-3 p-md-2">
-        <div class="transaction-card d-flex flex-row">
-          <div class = "income-icon"><i class="fa-solid fa-arrow-trend-up fa-lg "></i></div>
-          <div>
-            <h1 class = "transaction-card-heading">Salary</h1>
-            <h1 class = "transaction-card-category my-auto">Income</h1> 
-          </div>
-          <div class = "ml-auto my-auto">
-            <h1 class = "transaction-card-heading">+37,000</h1>
-            <h1 class = "transaction-card-category my-auto">2/10/2024</h1>
+      <% if(locals.recent_transactions && recent_transactions.length  > 0) { %>
+        <% recent_transactions.forEach((transaction) => { %> 
+          <% if(transaction.type === 'income'){ %>
+            <div class=" col-12 p-2 px-3 p-md-2">
+              <div class="transaction-card d-flex flex-row" >
+                <div class = "income-icon"><i class="fa-solid fa-arrow-trend-up fa-lg "></i></div>
+                <div>
+                  <h1 class = "transaction-card-heading"><%= transaction.name %></h1>
+                  <h1 class = "transaction-card-category my-auto"><%= transaction.category %></h1> 
+                </div>
+                <div class = "ml-auto my-auto">
+                  <h1 class = "transaction-card-amount" style ="color:rgb(64, 198, 64)">+ <%= transaction.amount %> </h1>
+                  <h1 class = "transaction-card-date my-auto"> <%= transaction.date %></h1>
+                </div>
+              </div>
+            </div>
+          <% }else{ %>
+            <div class=" col-12 p-2 px-3 p-md-2">
+              <div class="transaction-card d-flex flex-row" >
+                <div class = "expense-icon "><i class="fa-solid fa-arrow-trend-down fa-lg "></i></div>
+                <div>
+                  <h1 class = "transaction-card-heading"><%= transaction.name %></h1>
+                  <h1 class = "transaction-card-category my-auto"><%= transaction.category %></h1> 
+                </div>
+                <div class = "ml-auto my-auto">
+                  <h1 class = "transaction-card-amount" style ="color: rgb(255, 85, 114)">- <%= transaction.amount %></h1>
+                  <h1 class = "transaction-card-date my-auto"><%= transaction.date %></h1>
+                </div>
+              </div>
+            </div>
+          <% } %>
+        <% }) %>
+      <% }else{ %>
+        <div class="col-12 p-4 px-3 p-md-2">
+          <div class="transaction-card text-center">
+            <p class="m-0">No transactions are added yet. <br> Tip : Click on the plus icon at bottom right to add your balance as transaction.</p>
           </div>
         </div>
-      </div>
-      <div class=" col-12 p-2 px-3 p-md-2">
-        <div class="transaction-card d-flex flex-row">
-          <div class = "expense-icon "><i class="fa-solid fa-arrow-trend-down fa-lg "></i></div>
-          <div>
-            <h1 class = "transaction-card-heading">Groceries</h1>
-            <h1 class = "transaction-card-category my-auto">Shopping</h1> 
-          </div>
-          <div class = "ml-auto my-auto">
-            <h1 class = "transaction-card-heading">-12,000</h1>
-            <h1 class = "transaction-card-category my-auto">12/10/2024</h1>
-          </div>
-        </div>
-      </div>
+      <% } %>
     </div>
   </div>
   <!-- Button trigger modal -->
-<button type="button" class="button-add" data-toggle="modal" data-target="#staticBackdrop">
+<button type="button" class="button-add" data-toggle="modal" data-target="#staticBackdrop1">
   <i class="fa-solid fa-plus fa-lg add-button-icon"></i>
 </button>
 
-<!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable ">
+<!-- Modal 1 -->
+<div class="modal fade" id="staticBackdrop1" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered ">
     <div class="modal-content modal-style-edit">
       <div class="modal-header">
         <h5 class="modal-title modal-heading-style" id="staticBackdropLabel">Add transaction</h5>
@@ -65,29 +93,45 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+      <form action="/home" method="POST">        
       <div class="modal-body">    
-         <label class = "label-head" >Expenditure</label> 
-         <input type="text" name="expenditure" class="input-modal" placeholder="Expenditure" >
-         <label class = "label-head">Select a Category:</label>
+        <label class = "label-head" >Expenditure</label> 
+        <input type="text" name="expenditure" class="input-modal" required="" placeholder="Expenditure" >
+        <label class = "label-head">Select a Category:</label>
+        <br>
+         <select id="dropdown" class = "input-modal" name="category" >
+         <% if(locals.categories){ %>
+           <% categories.forEach((category) =>{ %>
+             <option> <%= category.name%> </option>
+           <% }) %>
+         <% }else{ %>
+           <option name="Others">Others</option>
+         <% } %>
+         </select>
+         <div class = "d-flex flex-row justify-content-end"><a href="/category">Add new category</a></div> <!-- fill this -->
          <br>
-          <select id="dropdown" class = "input-modal">
-              <option value="option1">Option 1</option>
-              <option value="option2">Option 2</option>
-              <option value="option3">Option 3</option>
-          </select>
-          <div class = "d-flex flex-row justify-content-end"><a href="">Add new category</a></div> <!-- fill this -->
-          <br>
-          <label class = "label-head" >Enter Amount</label> 
-          <input type="number" name="amount" class="input-modal" placeholder="Amount" >
-          <label class = "label-head"> Date</label>
-          <input type = "date" name="date" class="input-modal">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="modal-cancel-button" data-dismiss="modal">Close</button>
-        <button type="button" class="modal-add-button">Add</button>
-      </div>
+         <label class = "label-head">Select transaction type:</label>
+         <br>
+         <select id="dropdown" class = "input-modal" name="type" >
+           <option value="expense">Expense</option>
+           <option value="income">Income</option>
+         </select>
+         <label class = "label-head" >Enter Amount</label> 
+         <input type="number" name="amount" class="input-modal" required="" placeholder="Amount" >
+         <label class = "label-head"> Date</label>
+         <input id="transaction-date-input" type = "date" name="date"  class="input-modal" required="">
+     </div>
+     <div class="modal-footer">
+       
+       <button type="button" class="modal-cancel-button" data-dismiss="modal">Close</button>
+       <button type="submit" class="modal-add-button">Add</button>
+     </div>
+      </form>
     </div>
   </div>
+</div>
+
+  <!-- Modal 2 -->
 
 <%-include("partials/footer.ejs")%>    
 
