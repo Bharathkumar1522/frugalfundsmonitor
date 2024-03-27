@@ -10,6 +10,8 @@ const app = express();
 const port = 3000;
 const saltRounds = 15;
 
+
+// CHANGE PASSWORD
 const db = new pg.Client({
   user: "postgres",
   host: "localhost",
@@ -385,7 +387,7 @@ app.post("/delete-category", async (req,res) =>{
       await db.query("DELETE FROM categories WHERE category_id=$1", [categoryId]);
       res.redirect("/category");
     }catch(err){
-      console.log(err)
+      console.log(err) 
       res.redirect("/home");
     }
   }else{
