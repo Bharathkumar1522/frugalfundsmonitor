@@ -104,8 +104,6 @@
            <% categories.forEach((category) =>{ %>
              <option> <%= category.name%> </option>
            <% }) %>
-         <% }else{ %>
-           <option name="Others">Others</option>
          <% } %>
          </select>
          <div class = "d-flex flex-row justify-content-end"><a href="/category">Add new category</a></div> <!-- fill this -->
@@ -117,7 +115,8 @@
            <option value="income">Income</option>
          </select>
          <label class = "label-head" >Enter Amount</label> 
-         <input type="number" name="amount" class="input-modal" required="" placeholder="Amount" >
+         <input type="number" name="amount" class="input-modal" required=""min=1 max=<%= user_details.balance %> placeholder="Amount" >
+         <p class="p-1" style="color: rgb(150, 150, 150);">*Amount should be less than your available balance</p>
          <label class = "label-head"> Date</label>
          <input id="transaction-date-input" type = "date" name="date"  class="input-modal" required="">
      </div>
@@ -131,7 +130,6 @@
   </div>
 </div>
 
-  <!-- Modal 2 -->
 
 <%-include("partials/footer.ejs")%>    
 

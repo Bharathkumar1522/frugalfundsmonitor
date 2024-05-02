@@ -5,13 +5,11 @@
   box-sizing: border-box;
   font-family: 'Open Sans', sans-serif;
 }
-
 html{
   overflow-x: hidden;
   padding: 0;
   margin: 0;
 }
-
 body {
   height: 100vh;
   background-color: #eeeeee ;
@@ -28,7 +26,6 @@ body {
   width: 100%;
   border-radius: 0 0 17px 17px;
 }
-
 .heading-style{
   text-align: center;
   font-family: 'Kanit', sans-serif;
@@ -41,11 +38,9 @@ body {
   display: grid;
   grid-template-columns: 225px 1fr;
 }
-
 .sidebar_style{
   padding: 0;
 }
-
 .menu_ {
   width: 67px;
   height:80vh;
@@ -77,16 +72,13 @@ body {
     width: 190px;
   }
 }
-
 .all-menu-items{
   position: relative;
   width: 100%;
 }
-
 .all-menu-items a{
   text-decoration: none;
 }
-
 .menu-item {
   position: relative;
   list-style: none;
@@ -96,7 +88,6 @@ body {
   display: flex;
   align-items: center;
   cursor: pointer;
- 
 }
 @media (max-width: 576px){
   .menu-item{
@@ -107,7 +98,6 @@ body {
 .menu-item:hover {
   background-color: #605f5f;
 }
-
 .toggle-icon{
   padding-left: 12px; 
 }
@@ -116,7 +106,6 @@ body {
   padding-left: 6px;
   }
 }
-
 .toggle_ {
   background-color: #fafcfc;
   padding: 10px;
@@ -125,7 +114,6 @@ body {
   width: 44px;
   text-align: center;
 }
-
 .menu-option {
   margin-left: 20px;
   white-space: nowrap;
@@ -140,7 +128,6 @@ body {
     font-size: 0.8rem;
   }
 }
-
 /* content between header and footer */
 .main{
   width: 100%;
@@ -168,8 +155,6 @@ body {
     text-align: center;
   }  
 }
-
-
 .balance-card{
   border-radius: 15px;
   background: #fff;
@@ -179,7 +164,6 @@ body {
   text-align: center;
   color: rgb(64, 198, 64);
 }
-
 .income-card{
   border-radius: 15px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
@@ -189,7 +173,6 @@ body {
   text-align: center;
   color: rgb(255, 85, 114);
 }
-
 .card-amount-text{
   font-size: 1.8rem;
   font-weight: 600;
@@ -199,7 +182,6 @@ body {
     font-size: 1.3rem;
   }
 }
-
 .card-heading-text{
   font-weight: 600;
 }
@@ -209,7 +191,6 @@ body {
     margin-bottom: 5px;
   }
 }
-
 .transaction-font{
   font-family: 'Kanit', sans-serif;
   font-size: 2rem;
@@ -221,8 +202,6 @@ body {
     font-size: 1.5rem;
   }  
 }
-
-
 .transaction-card{
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
@@ -230,7 +209,6 @@ body {
   background:  #fdfdfd;
   width: 100%; 
 }
-
 .transaction-card-heading{
   font-size: 1.5rem;
   font-weight: 700;  
@@ -240,7 +218,6 @@ body {
     font-size: 1rem;
   }  
 }
-
 .transaction-card-category{
   color: rgb(121, 121, 121); 
   font-size: 1rem;
@@ -250,7 +227,6 @@ body {
     font-size: 0.9rem;
   }  
 }
-
 .transaction-card-amount{
   font-size: 1.5rem;
   font-weight: 700;  
@@ -261,8 +237,6 @@ body {
     font-size: 1rem;
   }  
 }
-
-
 .transaction-card-date{
   color: rgb(121, 121, 121);  
   font-size: 1rem;
@@ -272,7 +246,6 @@ body {
     font-size: 0.75rem;
   }  
 }
-
 .expense-icon{
   color: white;
   margin: auto 20px auto 0 ;
@@ -281,7 +254,6 @@ body {
   border-radius: 7px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
-
 .income-icon{
   color: white;
   margin: auto 20px auto 0 ;
@@ -290,7 +262,6 @@ body {
   border-radius: 7px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
-
 .button-add{
   position: fixed;
   right: 6%;
@@ -298,26 +269,27 @@ body {
   z-index: 900;
   border-radius: 54%;
   padding: 1.1rem;
-  background-image: linear-gradient(to right top, #48dcfe, #00c2f7, #00a6ed, #008ae0, #006dcd);
+  /* background-image: linear-gradient(to right top, #48dcfe, #00c2f7, #00a6ed, #008ae0, #006dcd); */
+  background: linear-gradient(
+    45deg,
+    rgb(26, 26, 26) 0%,
+    rgb(84, 84, 84) 100%
+  );
   border-width: 0px;
 }
-
 .add-button-icon{
   font-size: 1.5rem;
   color: white;
   font-weight: bold;
 }
-
 .modal-heading-style{
   font-family: 'Kanit', sans-serif;
   font-size: 1.6rem;
 }
-
 .modal-style-edit{
   border-radius: 14px;
   background-color: #eeeeee ;
 }
-
 .modal-add-button{
   background-image: linear-gradient(to right top, #48dcfe, #00c2f7, #00a6ed, #008ae0, #006dcd);
   font-family: 'Kanit', sans-serif;
@@ -327,7 +299,6 @@ body {
   width: 110px;
   color:white;
 }
-
 .modal-cancel-button{
   background: rgb(255,0,0);
   background: linear-gradient(90deg, rgba(255,0,0,1) 8%, rgba(251,78,78,1) 29%, rgba(232,11,11,1) 53%, rgba(245,65,65,1) 71%, rgba(250,16,16,1) 91%);
@@ -338,7 +309,6 @@ body {
   width: 100px;
   color:white;
 }
-
 .input-modal {
   border: none;
   padding: 1rem;
@@ -356,7 +326,6 @@ body {
      inset -20px -20px 60px #ffffff;
   transition: 0.3s;
 }
-
 .label-head{
   color:#000000;
   z-index: 1;
@@ -371,13 +340,19 @@ body {
   align-items:center;
 } */
 /* ============================================================================================================== */
-
 .buttons-position{
     position: absolute;
     bottom: 0;
     right: 0;
 }
-
+@media(max-width:800px){
+  .buttons-position{
+    position: initial;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+}
 .divider{
   margin: 1rem;
 }
@@ -386,11 +361,9 @@ body {
     margin: 0;
   }
 }
-
 #current-month-transactions, #previous-transactions{
   padding: 0;
 }
-
 .modal-add-category-btn{
   background-image: linear-gradient(to right top, #48dcfe, #00c2f7, #00a6ed, #008ae0, #006dcd);
   font-family: 'Kanit', sans-serif;
@@ -400,6 +373,18 @@ body {
   width: 110px;
   color:white;
   font-size: 14px;
+}
+/* reports tab */
+.reports-card{
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  padding: 25px;
+  background:  #fdfdfd;
+  width: 100%; 
+}
+.table_{
+  border: 1px solid #d8d8d8;
+  width: 100%;
 }
 
 /* login page and sign up page */
@@ -414,21 +399,18 @@ body {
   border-radius: 40px;
   padding: 25px 35px;
   border: 5px solid rgb(255, 255, 255);
-  box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 30px 30px -20px;
+  box-shadow: rgba(168, 168, 168, 0.878) 0px 30px 30px -20px;
   margin: 20px;
 }
-
 .heading-login-page {
   text-align: center;
   font-weight: 900;
   font-size: 30px;
   color: rgb(0, 0, 0);
 }
-
 .form-login-page {
   margin-top: 20px;
 }
-
 .form-login-page .input {
   width: 100%;
   background: white;
@@ -436,65 +418,56 @@ body {
   padding: 15px 20px;
   border-radius: 20px;
   margin-top: 15px;
-  box-shadow: #cff0ff 0px 10px 10px -5px;
+  box-shadow: rgba(202, 202, 202, 0.878) 0px 10px 10px -5px;
   border-inline: 2px solid transparent;
 }
-
 .form-login-page .input::-moz-placeholder {
   color: rgb(170, 170, 170);
 }
-
 .form-login-page .input::placeholder {
   color: rgb(170, 170, 170);
 }
-
 .form-login-page .input:focus {
   outline: none;
-  border-inline: 2px solid #12b1d1;
+  border-inline: 2px solid #7b7b7b;
 }
-
 .form-login-page .login-button {
   display: block;
   width: 100%;
   font-weight: bold;
   background: linear-gradient(
     45deg,
-    rgb(16, 137, 211) 0%,
-    rgb(18, 177, 209) 100%
+    rgb(26, 26, 26) 0%,
+    rgb(84, 84, 84) 100%
   );
   color: white;
   padding-block: 15px;
   margin: 30px auto 10px;
   border-radius: 20px;
-  box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 20px 10px -15px;
+  box-shadow: rgba(168, 168, 168, 0.878) 0px 20px 10px -15px;
   border: none;
   transition: all 0.2s ease-in-out;
   text-align: center;
 }
-
 .form-login-page .login-button:hover {
   transform: scale(1.03);
-  box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 23px 10px -20px;
+  box-shadow: rgb(84, 84, 84, 0.8784313725) 0px 23px 10px -20px;
   text-decoration: none;
 }
-
 .form-login-page .login-button:active {
   transform: scale(0.95);
-  box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 15px 10px -10px;
+  box-shadow: rgb(84, 84, 84, 0.8784313725) 0px 15px 10px -10px;
 }
-
 .sign-up-link {
   font-size: 11px;
   color: #0099ff;
   text-decoration: none;
 }
-
 .setting-fonts{
   font-size: 1.7rem;
   font-weight: 700;
 
 }
-
 .select-tag-settings{
   border: none;
   padding: 1rem;
@@ -507,7 +480,6 @@ body {
   align-items: center;
   margin-bottom: 8px;
 }
-
 .logout-button{
   background: rgb(255,0,0);
   background: linear-gradient(90deg, rgba(255,0,0,1) 8%, rgba(251,78,78,1) 29%, rgba(232,11,11,1) 53%, rgba(245,65,65,1) 71%, rgba(250,16,16,1) 91%);
@@ -522,7 +494,6 @@ body {
   left: 50%; 
   transform: translateX(-50%); 
 }
-
 .bottom-text {
   display: flex;
   flex-direction: column;
@@ -532,11 +503,9 @@ body {
   font-size: 12px;
   font-weight: 400;
 }
-
 .bottom-text p{
   margin-bottom: 0;
 }
-
 .bottom-text a {
   color: #0173ed;
   text-decoration: none;
@@ -544,7 +513,6 @@ body {
   transition: color 0.3s ease;
   margin: 0;
 }
-
 .bottom-text a:hover {
   color: #3f95f2;
 }

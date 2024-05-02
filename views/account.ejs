@@ -1,0 +1,33 @@
+<%-include("partials/header.ejs")%> 
+<%-include("partials/navbar.ejs")%> 
+
+<h1 class = "hello-user">Account</h1>
+<div>
+  <% if(locals.user){ %>
+    <table class="table table-hover">
+    <thead>
+    </thead>
+    <tbody>  
+      <tr>
+        <td>User name:</td>
+        <td><%= user.name_ %></td>
+      </tr>
+      <tr>
+        <td>User id: </td>
+        <td><%= user.username %></td>
+      </tr>  
+      <tr>
+        <td>Password:</td>
+        <td>********</td>
+      </tr> 
+    </tbody>
+  </table>
+<% } %>
+</div>
+<a href="/logout">
+  <div class = "d-flex flex-column justify-content-center"> 
+    <button type="button" class="logout-button" >Logout</button>
+</div>
+</a>
+
+<%-include("partials/footer.ejs")%>     

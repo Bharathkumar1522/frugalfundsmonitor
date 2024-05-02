@@ -19,8 +19,6 @@ document.addEventListener('DOMContentLoaded', function() {
   };
   dropdown.addEventListener('shown.bs.dropdown', toggleDropdown);
 });
-
-
 // Get the date input element
 var dateInput = document.getElementById('transaction-date-input');
 // Get the current date
@@ -32,4 +30,3 @@ var currentDate = yyyy + '-' + mm + '-' + dd;
 
 // Set the max attribute to the current date
 dateInput.setAttribute('max', currentDate);
-
