@@ -37,9 +37,9 @@
     <% } %>
 </div>
 
-<div class = "buttons-position p-5"> 
-  <button type="button" class="modal-add-category-btn ml-4" data-toggle="modal" data-target="#staticBackdrop2">Add</button>
-  <button type="button" class="modal-add-category-btn"  data-toggle="modal" data-target="#staticBackdrop1">Edit</button>
+<div class = "buttons-position p-md-5"> 
+  <button type="button" class="modal-add-category-btn mr-1" data-toggle="modal" data-target="#staticBackdrop2">Add</button>
+  <button type="button" class="modal-add-category-btn mr-1"  data-toggle="modal" data-target="#staticBackdrop1">Edit</button>
   <button type="button" class="modal-cancel-button"  data-toggle="modal" data-target="#staticBackdrop3">Delete</button>
 </div>
 
@@ -116,13 +116,14 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content modal-style-edit">
         <div class="modal-header">
-          <h5 class="modal-title modal-heading-style" id="staticBackdropLabel">Edit Category</h5>
+          <h5 class="modal-title modal-heading-style" id="staticBackdropLabel">Delete Category</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div> 
         <form action="/delete-category" method="POST">
           <div class="modal-body">    
+              <p class="p-1" style="color: rgb(150, 150, 150);">*You can not delete a category which is already linked with a transaction</p>
               <label class = "label-head" for="">Select a Category to delete:</label>
               <br>
               <select id="dropdown" class = "input-modal" name="id">
@@ -130,9 +131,7 @@
                   <% categories.forEach((category) =>{ %>
                     <option value = <%= category.id %> > <%= category.name%> </option>
                   <% }) %>
-                <% }else{ %>
-                  <option value="Others">Others</option>
-                <% } %>
+                <% }%>
               </select>
           </div>
           <div class="modal-footer">

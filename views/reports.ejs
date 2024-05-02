@@ -4,14 +4,60 @@
 <h1 class = "hello-user">Reports</h1>
 
 
-<div class="transaction-card d-flex flex-row">
-    <div class = "expense-icon">
-        <i class="fa-solid fa-triangle-exclamation fa-lg"></i>
-    </div>
-    <div>
-        <h1 class = "transaction-card-heading">Limit Exceeded :</h1>
-        <h1 class = "transaction-card-heading">In categories&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</h1>
-    </div>
+<div class="reports-card">
+    <% if(locals.pieData && pieData!= -1){ %>
+        <h1 class = "transaction-font">Category wise spendings</h1>
+        <div class="row w-100">
+            <div class="col-12 col-lg-6 d-flex flex-row justify-content-center mb-2 p-4">
+                    <canvas id="category-pie-plot"></canvas>
+            </div>
+            <div class="col-12 col-lg-6 mt`">
+                <div>
+                    <table class="table table-hover table_" >
+                        <thead>
+                            <td><strong>Category</strong></td>
+                            <td><strong>Expense</strong></td>
+                        </thead>
+                        <tbody>  
+                            <% categoryData.forEach((data) => {%>
+                                <tr>
+                                  <td><%= data.category %></td>
+                                  <td><%= data.total_expense %>/-</td>
+                                </tr>                            
+                            <% }); %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    <% }else if(locals.message){ %>
+        <div class="text-center p-3">
+            <p><%= message %></p>
+        </div>
+    <% }else if(locals.errorMessage){ %>
+        <div class="text-center p-3">
+            <p><%= errorMessage %></p>
+        </div>
+    <% } %>
 </div>
-
+<script>
+    console.log("locals : ",'<%= pieData %>' );
+        console.log('<%- unescape(pieData) %>' );
+        const expensesData = JSON.parse('<%- unescape(pieData) %>');
+        for(var i = 0; i < expensesData.length; i++){
+            expensesData[i].total_expense = parseInt(expensesData[i].total_expense) ;
+        }
+        const ctx = document.getElementById('category-pie-plot').getContext('2d');
+        const chart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: expensesData.map(data => data.category),
+            datasets: [{
+            label: 'Expenses',
+            data: expensesData.map(data => data.total_expense),
+            borderWidth: 1
+            }]
+        }
+        });
+</script>
 <%-include("partials/footer.ejs")%>     

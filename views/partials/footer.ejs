@@ -1,4 +1,9 @@
 </div> 
-<script src="/styles/styles.js"></script>   
+<script src="/styles/styles.js"></script>  
+<% if(locals.showReminder && showReminder === true){ %>
+    <script>
+      alert("Limit exceeded for category " + "<%= categoryExceeded %>" + " with this transaction!");
+    </script> 
+<% } %>
 </body>
 </html>
