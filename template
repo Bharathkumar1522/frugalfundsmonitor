@@ -1,7 +1,13 @@
-SESSION_SECRET=
+SESSION_SECRET="TOPSECRETWORD"
 POSTGRES_HOST="localhost"
 POSTGRES_USER="postgres"
 POSTGRES_DB=
 POSTGRES_PASSWORD=
 POSTGRES_PORT=5432
 SALT_ROUNDS=15
+
+!!! READ THIS!!!
+Enter your data base name in "" at line 4 (FrugalFundsMonitor or Cultivating Connections)
+Enter database password in line 5 after = in " "
+Rename the current file template.txt to .env !!!!IMPORTANT
+After doing these steps, delete from line 9 to 13
