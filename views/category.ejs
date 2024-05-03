@@ -39,7 +39,7 @@
 
 <div class = "buttons-position p-md-5"> 
   <button type="button" class="modal-add-category-btn mr-1" data-toggle="modal" data-target="#staticBackdrop2">Add</button>
-  <button type="button" class="modal-add-category-btn mr-1"  data-toggle="modal" data-target="#staticBackdrop1">Edit</button>
+  <button type="button" class="modal-add-category-btn mr-1 d-none"  data-toggle="modal" data-target="#staticBackdrop1">Edit</button>
   <button type="button" class="modal-cancel-button"  data-toggle="modal" data-target="#staticBackdrop3">Delete</button>
 </div>
 
@@ -53,7 +53,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div> 
-        <form action="/edit-category" method="PATCH">
+        <form action="/edit-category" method="POST">
           <div class="modal-body">    
               <label class = "label-head" for="">Select a Category:</label>
               <br>

@@ -12,6 +12,11 @@ const port = 3000;
 env.config();
 const saltRounds = process.env.SALT_ROUNDS;
 
+const previousMonthData = {
+  expenses: 1000,
+  income: 2000
+};
+
 const db = new pg.Client({
   user: process.env.POSTGRES_USER,
   host: process.env.POSTGRES_HOST,
@@ -97,11 +102,37 @@ async function getPieChartData(username){
   const result = await db.query("SELECT C.category_name AS category, SUM(T.transaction_amount) AS total_expense FROM transactions T JOIN categories C ON T.category_id = C.category_id WHERE T.username=$1 AND DATE_TRUNC('month', T.transaction_date) = DATE_TRUNC('month', CURRENT_DATE) AND T.transaction_type='expense' GROUP BY C.category_name;",[
     username
   ]);
-  // if(result.rows.length > 0){
+  if(result.rows.length > 0){
     return result.rows;
-  // }else{
-  //   return -1;
-  // }
+  }else{
+    return -1;
+  }
+}
+async function getCurrentMonthData(username){
+  const expense = await db.query("SELECT SUM(transaction_amount) FROM transactions WHERE username=$1 AND transaction_type='expense' AND DATE_TRUNC('month',transaction_date) = DATE_TRUNC('month', CURRENT_DATE) ;",[
+    username
+  ]);
+  const income = await db.query("SELECT SUM(transaction_amount) FROM transactions WHERE username=$1 AND transaction_type='income' AND DATE_TRUNC('month',transaction_date) = DATE_TRUNC('month', CURRENT_DATE) ;",[
+    username
+  ]);
+  let result = {
+    expenses: expense.rows[0].sum,
+    income: income.rows[0].sum
+  }
+  return result;  
+}
+async function getPreviousMonthData(username){
+  const expense = await db.query("SELECT SUM(transaction_amount) FROM transactions WHERE username=$1 AND transaction_type='expense' AND DATE_TRUNC('month',transaction_date) = DATE_TRUNC('month', CURRENT_DATE - INTERVAL '1 month');",[
+    username
+  ]);
+  const income = await db.query("SELECT SUM(transaction_amount) FROM transactions WHERE username=$1 AND transaction_type='income' AND DATE_TRUNC('month',transaction_date) = DATE_TRUNC('month', CURRENT_DATE - INTERVAL '1 month');",[
+    username
+  ]);
+  let result = {
+    expenses: expense.rows[0].sum,
+    income: income.rows[0].sum
+  }
+  return result;  
 }
 // check is the  total expenses of a certain category is under the limit or not
 async function isAmountUnderLimit(username, categoryId){
@@ -217,18 +248,17 @@ app.get("/account",(req,res)=>{
 app.get("/reports",async (req,res)=>{
   if(req.isAuthenticated()){
     try{
+      const currentMonthData = await getCurrentMonthData(req.user.username);
+      const previousMonthData = await getPreviousMonthData(req.user.username);
       const pieData = await getPieChartData(req.user.username);
-      console.log(JSON.stringify(pieData));
-      if(pieData != -1){
-        res.render("reports.ejs",{
-          pieData: JSON.stringify(pieData),
-          categoryData: pieData
-        });
-      }else{
-        res.render("reports.ejs",{
-          "message": "No transactions have been made in current month to generate reports."
-        })
-      }
+      console.log(currentMonthData);
+      console.log(previousMonthData);
+      res.render("reports.ejs",{
+        pieData: JSON.stringify(pieData),
+        categoryData: pieData,
+        previousMonthData: JSON.stringify(previousMonthData),
+        currentMonthData : JSON.stringify(currentMonthData)
+      });
     }catch(err){
       console.log("Error getting data for plots",err);
       res.render("reports.ejs",{

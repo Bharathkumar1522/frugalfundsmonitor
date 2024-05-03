@@ -5,13 +5,28 @@
 
 
 <div class="reports-card">
-    <% if(locals.pieData && pieData!= -1){ %>
-        <h1 class = "transaction-font">Category wise spendings</h1>
-        <div class="row w-100">
-            <div class="col-12 col-lg-6 d-flex flex-row justify-content-center mb-2 p-4">
-                    <canvas id="category-pie-plot"></canvas>
+    <h1 class = "transaction-font">Category wise spendings</h1>
+    <div class="row w-100">
+        <% if(locals.pieData && pieData!= -1){ %>
+            <div class="col-12 col-lg-5 d-flex flex-row justify-content-center mb-2 p-4">
+                <canvas id="category-pie-plot"></canvas>
             </div>
-            <div class="col-12 col-lg-6 mt`">
+        <% }else if(locals.message){ %>
+            <div class="text-center p-3">
+                <p><%= message %></p>
+            </div>
+        <% }else if(locals.errorMessage){ %>
+            <div class="text-center p-3">
+                <p><%= errorMessage %></p>
+            </div>
+        <% } %>
+        <% if(locals.currentMonthData && locals.previousMonthData){ %>
+            <div class="col-12 col-lg-7 d-flex flex-row justify-content-center mb-2 p-4">
+                <canvas id="bar-plot"></canvas>
+            </div>
+        <% } %>
+        <% if(locals.categoryData){ %>
+            <div class="col-12 col-lg-7 mt`">
                 <div>
                     <table class="table table-hover table_" >
                         <thead>
@@ -29,20 +44,12 @@
                     </table>
                 </div>
             </div>
-        </div>
-    <% }else if(locals.message){ %>
-        <div class="text-center p-3">
-            <p><%= message %></p>
-        </div>
-    <% }else if(locals.errorMessage){ %>
-        <div class="text-center p-3">
-            <p><%= errorMessage %></p>
-        </div>
-    <% } %>
+        <% } %>
+    </div>
 </div>
 <script>
-    console.log("locals : ",'<%= pieData %>' );
-        console.log('<%- unescape(pieData) %>' );
+        // console.log("locals : ",'<%= pieData %>' );
+        // console.log('<%- unescape(pieData) %>' );
         const expensesData = JSON.parse('<%- unescape(pieData) %>');
         for(var i = 0; i < expensesData.length; i++){
             expensesData[i].total_expense = parseInt(expensesData[i].total_expense) ;
@@ -58,6 +65,47 @@
             borderWidth: 1
             }]
         }
+        });
+
+        const previousMonthData = JSON.parse('<%- unescape(previousMonthData) %>');
+        const currentMonthData = JSON.parse('<%- unescape(currentMonthData) %>');
+        // console.log(previousMonthData);
+        // console.log(currentMonthData);
+        previousMonthData.expenses = parseInt(previousMonthData.expenses) ;
+        previousMonthData.income = parseInt(previousMonthData.income) ;
+        currentMonthData.expenses = parseInt(currentMonthData.expenses) ;
+        currentMonthData.income = parseInt(currentMonthData.income) ;
+        const expenses = [previousMonthData.expenses, currentMonthData.expenses];
+        console.log(expenses);
+        const income = [previousMonthData.income, currentMonthData.income];
+        console.log(income);
+        const ctx2 = document.getElementById('bar-plot').getContext('2d');
+        const myChart = new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: ['Previous Month', 'Current Month'],
+                datasets:  [
+                    {
+                        label: 'Income',
+                        backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                        borderColor: 'rgb(54, 162, 235)',
+                        data: income
+                    },
+                    {
+                        label: 'Expenses',
+                        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                        borderColor: 'rgb(255, 99, 132)',
+                        data: expenses
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
         });
 </script>
 <%-include("partials/footer.ejs")%>     
