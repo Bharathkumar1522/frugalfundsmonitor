@@ -39,7 +39,7 @@
 
 <div class = "buttons-position p-md-5"> 
   <button type="button" class="modal-add-category-btn mr-1" data-toggle="modal" data-target="#staticBackdrop2">Add</button>
-  <button type="button" class="modal-add-category-btn mr-1 d-none"  data-toggle="modal" data-target="#staticBackdrop1">Edit</button>
+  <button type="button" class="modal-add-category-btn mr-1"  data-toggle="modal" data-target="#staticBackdrop1">Edit</button>
   <button type="button" class="modal-cancel-button"  data-toggle="modal" data-target="#staticBackdrop3">Delete</button>
 </div>
 
@@ -62,16 +62,11 @@
                   <% categories.forEach((category) =>{ %>
                     <option value = <%= category.id %> > <%= category.name%> </option>
                   <% }) %>
-                <% }else{ %>
-                  <option value="Others">Others</option>
-                <% } %>
+                <% }%>
               </select>
-              <br>
-              <label class = "label-head" >New category Name</label> 
-              <input type="text" name="expenditure" class="input-modal" placeholder="New category" >
-  
+              <br>  
               <label class = "label-head">Enter Limit</label> 
-              <input type="number" name="text" class="input-modal" placeholder="Limit amount" >
+              <input type="number" name="limit" min="1" class="input-modal" placeholder="Limit amount" required="">
           </div>
           <div class="modal-footer">
             <button type="button" class="modal-cancel-button" data-dismiss="modal">Cancel</button>

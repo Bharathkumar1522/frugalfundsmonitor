@@ -416,10 +416,21 @@ app.post("/add-category", async (req,res) =>{
     res.redirect("/login");
   }
 });
-app.post("/edit-category", (req,res) => {
+app.post("/edit-category", async (req,res) => {
   if(req.isAuthenticated()){
     console.log(req.body);
-    res.redirect("/category");
+    let categoryId = parseInt(req.body.category);
+    let limit = parseInt(req.body.limit);
+    try{
+      await db.query("UPDATE categories SET category_limit=$1 WHERE category_id=$2",[
+        limit,
+        categoryId
+      ]);
+    }catch(err){
+      console.log("Error editing limit: ", err);
+    }finally{
+      res.redirect("/category");
+    }
   }else{
     res.redirect("/login");
   }
